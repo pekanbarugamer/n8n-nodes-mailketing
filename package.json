@@ -2,7 +2,7 @@
   "name": "n8n-nodes-mailketing",
   "version": "0.1.0",
   "description": "Mailketing integration for n8n",
-  "author": "Mailketing",
+  "author": "Mailketing <support@mailketing.co.id>",
   "license": "MIT",
   "keywords": [
     "n8n-community-node-package",
@@ -11,20 +11,28 @@
   ],
   "main": "dist/index.js",
   "files": [
-    "dist"
-  ],
+  "dist",
+  "README.md",
+  "LICENSE"
+],
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "npm run build"
   },
+  "repository": {
+  "type": "git",
+  "url": "https://github.com/pekanbarugamer/n8n-nodes-mailketing"
+},
   "dependencies": {
     "n8n-core": "1.42.0",
     "n8n-workflow": "1.42.0"
   },
   "devDependencies": {
-    "@types/uuid": "^11.0.0",
     "typescript": "^5.3.3"
   },
+  "engines": {
+  "node": ">=18.0.0"
+},
   "overrides": {
     "lru-cache": "6.0.0"
   }
