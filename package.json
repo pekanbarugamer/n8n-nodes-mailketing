@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-mailketing",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Mailketing integration for n8n",
   "author": "Mailketing <support@mailketing.co.id>",
   "license": "MIT",
