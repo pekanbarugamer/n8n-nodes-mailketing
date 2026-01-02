@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-mailketing",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Mailketing integration for n8n",
   "author": "Mailketing <support@mailketing.co.id>",
   "license": "MIT",
@@ -31,12 +31,13 @@
     "type": "git",
     "url": "https://github.com/pekanbarugamer/n8n-nodes-mailketing"
   },
-  "dependencies": {
-    "n8n-workflow": "1.42.0"
+  "peerDependencies": {
+    "n8n-workflow": "*"
   },
   "devDependencies": {
     "@types/node": "^25.0.3",
     "copyfiles": "^2.4.1",
+    "n8n-workflow": "1.42.0",
     "typescript": "^5.3.3"
   },
   "engines": {
