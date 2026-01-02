@@ -11,7 +11,7 @@ export class Mailketing implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Mailketing',
 		name: 'mailketing',
-		icon: 'file:mailketing.svg',
+		icon: 'file:Mailketing.png',
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"]}}',
@@ -300,6 +300,7 @@ export class Mailketing implements INodeType {
 		const operation = this.getNodeParameter('operation', 0) as string;
 
 		const returnData: INodeExecutionData[] = [];
+		const promises: Promise<any>[] = [];
 
 		for (let i = 0; i < items.length; i++) {
 			if (operation === 'addSubToList') {
@@ -316,14 +317,23 @@ export class Mailketing implements INodeType {
 					country: this.getNodeParameter('country', i),
 				};
 
-				const response = await this.helpers.request({
-					method: 'POST',
-					url: 'https://api.mailketing.co.id/api/v1/addsubtolist',
-					form: body,
-					json: true,
-				});
-
-				returnData.push({ json: response });
+				promises.push(
+					this.helpers
+						.request({
+							method: 'POST',
+							url: 'https://api.mailketing.co.id/api/v1/addsubtolist',
+							form: body,
+							json: true,
+						})
+						.then((response) => {
+							return {
+								json: response,
+								pairedItem: {
+									item: i,
+								},
+							};
+						}),
+				);
 			}
 
 			if (operation === 'sendEmail') {
@@ -344,16 +354,28 @@ export class Mailketing implements INodeType {
 				if (attach2) body.attach2 = attach2;
 				if (attach3) body.attach3 = attach3;
 
-				const response = await this.helpers.request({
-					method: 'POST',
-					url: 'https://api.mailketing.co.id/api/v1/send',
-					form: body,
-					json: true,
-				});
-
-				returnData.push({ json: response });
+				promises.push(
+					this.helpers
+						.request({
+							method: 'POST',
+							url: 'https://api.mailketing.co.id/api/v1/send',
+							form: body,
+							json: true,
+						})
+						.then((response) => {
+							return {
+								json: response,
+								pairedItem: {
+									item: i,
+								},
+							};
+						}),
+				);
 			}
 		}
+
+		const results = await Promise.all(promises);
+		returnData.push(...results);
 
 		return [returnData];
 	}
