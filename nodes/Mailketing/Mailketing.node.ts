@@ -267,11 +267,14 @@ export class Mailketing implements INodeType {
 			async getLists(this: ILoadOptionsFunctions) {
 				const credentials = await this.getCredentials('mailketingApi');
 
-				const response = await this.helpers.request({
+				const response = await this.helpers.httpRequest({
 					method: 'POST',
 					url: 'https://api.mailketing.co.id/api/v1/viewlist',
-					form: {
-						api_token: credentials.apiToken,
+					body: new URLSearchParams({
+						api_token: credentials.apiToken as string,
+					}).toString(),
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
 					},
 					json: true,
 				});
@@ -319,10 +322,13 @@ export class Mailketing implements INodeType {
 
 				promises.push(
 					this.helpers
-						.request({
+						.httpRequest({
 							method: 'POST',
 							url: 'https://api.mailketing.co.id/api/v1/addsubtolist',
-							form: body,
+							body: new URLSearchParams(body as any).toString(),
+							headers: {
+								'Content-Type': 'application/x-www-form-urlencoded',
+							},
 							json: true,
 						})
 						.then((response) => {
@@ -356,10 +362,13 @@ export class Mailketing implements INodeType {
 
 				promises.push(
 					this.helpers
-						.request({
+						.httpRequest({
 							method: 'POST',
 							url: 'https://api.mailketing.co.id/api/v1/send',
-							form: body,
+							body: new URLSearchParams(body).toString(),
+							headers: {
+								'Content-Type': 'application/x-www-form-urlencoded',
+							},
 							json: true,
 						})
 						.then((response) => {
