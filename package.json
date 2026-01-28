@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-mailketing",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Mailketing integration for n8n",
   "author": "Mailketing <support@mailketing.co.id>",
   "license": "MIT",
@@ -11,20 +11,20 @@
   ],
   "n8n": {
     "nodes": [
-      "dist/Mailketing/Mailketing.node.js"
+      "dist/nodes/Mailketing/Mailketing.node.js"
     ],
     "credentials": [
-      "dist/Mailketing/MailketingApi.credentials.js"
+      "dist/credentials/MailketingApi.credentials.js"
     ]
   },
-  "main": "dist/Mailketing/Mailketing.node.js",
+  "main": "dist/nodes/Mailketing/Mailketing.node.js",
   "files": [
     "dist",
     "README.md",
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsc && npx --yes copyfiles -u 1 \"nodes/**/*.png\" dist",
+    "build": "tsc && npx --yes copyfiles -u 1 \"nodes/**/*.png\" dist/nodes",
     "prepublishOnly": "npm run build"
   },
   "repository": {
